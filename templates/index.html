@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Поиск специалистов</h1>
+  <p class="muted">Фильтруй по услуге, стажу и цене. Выдача — по 5 анкет за раз.</p>
+</section>
+
+<section class="card">
+  <form id="formSearch" class="grid">
+    <label class="field">
+      <span>Имя</span>
+      <input name="name" placeholder="например: Иван" />
+    </label>
+
+    <label class="field">
+      <span>Вид услуги</span>
+      <select name="service_type" id="serviceSelect">
+        <option value="">Любая</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span>Стаж от</span>
+      <input name="exp_min" type="number" min="0" placeholder="0" />
+    </label>
+    <label class="field">
+      <span>Стаж до</span>
+      <input name="exp_max" type="number" min="0" placeholder="25" />
+    </label>
+
+    <label class="field">
+      <span>Цена от (₽)</span>
+      <input name="price_min" type="number" min="0" placeholder="500" />
+    </label>
+    <label class="field">
+      <span>Цена до (₽)</span>
+      <input name="price_max" type="number" min="0" placeholder="5000" />
+    </label>
+
+    <div class="actions">
+      <button class="btn" type="submit">Найти</button>
+      <button class="btn btn--ghost" type="button" id="btnReset">Сброс</button>
+    </div>
+  </form>
+</section>
+
+<section>
+  <div class="toolbar">
+    <div class="muted" id="resultMeta">—</div>
+    <div class="pager">
+      <button class="btn btn--ghost" id="btnPrev" disabled>Назад</button>
+      <button class="btn btn--ghost" id="btnNext" disabled>Дальше</button>
+    </div>
+  </div>
+
+  <div class="grid-cards" id="results"></div>
+</section>
+{% endblock %}
