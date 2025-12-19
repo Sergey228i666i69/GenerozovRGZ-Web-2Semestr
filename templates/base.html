@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Service Market</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="/">Service Market</a>
+      <nav class="nav">
+        <a href="/" class="nav__link">Поиск</a>
+        <a href="/profile" class="nav__link" id="navProfile" style="display:none;">Моя анкета</a>
+        <a href="/admin" class="nav__link" id="navAdmin" style="display:none;">Админ</a>
+      </nav>
+      <div class="auth" id="authBox">
+        <button class="btn btn--ghost" id="btnOpenLogin">Войти</button>
+        <button class="btn" id="btnOpenRegister">Регистрация</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <strong>{{ STUDENT_NAME }}</strong> · {{ STUDENT_GROUP }} · вариант {{ VARIANT }}
+      </div>
+      <div class="muted">Flask + PostgreSQL + REST</div>
+    </div>
+  </footer>
+
+  <!-- Модалки -->
+  <div class="modal" id="modalLogin" aria-hidden="true">
+    <div class="modal__panel">
+      <div class="modal__head">
+        <h3>Вход</h3>
+        <button class="iconbtn" data-close="modalLogin">✕</button>
+      </div>
+      <form id="formLogin" class="form">
+        <label class="field">
+          <span>Логин</span>
+          <input name="login" autocomplete="username" required />
+        </label>
+        <label class="field">
+          <span>Пароль</span>
+          <input name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <button class="btn" type="submit">Войти</button>
+        <p class="muted small">Тест: <b>admin / Admin123!</b> или <b>user01 / User123!</b></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="modalRegister" aria-hidden="true">
+    <div class="modal__panel">
+      <div class="modal__head">
+        <h3>Регистрация</h3>
+        <button class="iconbtn" data-close="modalRegister">✕</button>
+      </div>
+      <form id="formRegister" class="form">
+        <label class="field">
+          <span>Логин</span>
+          <input name="login" autocomplete="username" required />
+          <small class="muted">3–50 символов, латиница/цифры/знаки</small>
+        </label>
+        <label class="field">
+          <span>Пароль</span>
+          <input name="password" type="password" autocomplete="new-password" required />
+          <small class="muted">6–80 символов, латиница/цифры/знаки</small>
+        </label>
+        <button class="btn" type="submit">Создать аккаунт</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    window.SERVICE_TYPES = {{ ["репетитор","бухгалтер","программист","дизайнер","юрист","фотограф","маркетолог","психолог","переводчик","сантехник"] | tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
