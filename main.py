@@ -347,7 +347,7 @@ def init_db():
     # admin
     admin = User(
         login="admin",
-        password_hash=generate_password_hash("Admin123!"),
+        password_hash=generate_password_hash("Admin123!", method='pbkdf2:sha256'),
         is_admin=True,
         is_hidden=False,
         name="Администратор",
@@ -377,7 +377,7 @@ def init_db():
         login = f"user{i:02d}"
         u = User(
             login=login,
-            password_hash=generate_password_hash("User123!"),
+            password_hash=generate_password_hash("User123!", method='pbkdf2:sha256'),
             is_admin=False,
             is_hidden=False,
             name=f"{random.choice(names)} {random.choice(['Иванов','Петров','Сидоров','Кузнецов','Смирнов','Фёдоров','Орлова','Васильева'])}",
